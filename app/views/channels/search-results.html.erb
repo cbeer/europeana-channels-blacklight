@@ -7,5 +7,11 @@
 </div>
 
 <div id="content" class="col-md-9 col-sm-8">
-  <%= render 'catalog/search_results' %>
+  <% unless has_search_parameters? %>
+    <%# if there are no input/search related params, display the "home" partial -%>
+    <%= render 'home' %>
+  <% else %>
+    <%= render 'search_results' %>
+		<%# render 'catalog/search_results' %>
+  <% end %>
 </div>

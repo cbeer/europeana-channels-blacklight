@@ -18,9 +18,31 @@
     <%= favicon_link_tag 'favicon.ico' %>
     <%= stylesheet_link_tag "application", media: "all" %>
     <style>
+      .search-box.home {
+        background-color: #fff;
+      }
+
+      .search-box.music {
+        background-color: #fbac40;
+      }
+
+      .search-box.fashion {
+        background-color: #e598dc;
+      }
+
       @media all and (min-width: 60em) {
-        body.blacklight-catalog-index {
-          background-image: url( '<%= Channels::Application.config.channels[:index][:hero] %>' );
+        body.blacklight-channels-index {
+          background-image: url( <%= image_path Channels::Application.config.channels[:home][:hero] %> );
+        }
+
+        .hero.channel-music {
+          height: 500px;
+          background-image: url( <%= image_path Channels::Application.config.channels[:music][:hero] %> );
+        }
+
+        .hero.channel-fashion {
+          height: 500px;
+          background-image: url( <%= image_path Channels::Application.config.channels[:fashion][:hero] %> );
         }
       }
     </style>
@@ -34,8 +56,8 @@
     <![endif]-->
 
   </head>
-  <body class="<%= render_body_class %>">
-  <%= render :partial => 'shared/header_navbar' %>
+  <body class="<%= render_body_class %> <%= 'hero' if !has_search_parameters? %>">
+  <%# render :partial => 'shared/header_navbar' %>
 
   <%= render partial: 'shared/ajax_modal' %>
 
