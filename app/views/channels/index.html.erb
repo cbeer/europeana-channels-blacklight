@@ -1,3 +1,4 @@
-<h1><%= @channel.id %></h1>
-<h2>index for the home channel</h2>
-<p>unique to the home page layout</p>
+<div class="search-box <%= @channel.id %>">
+	<a href="/"><%= image_tag( 'logos/europeana.png', :alt => 'Europeana - think culture' ) %></a>
+  <%= render_search_bar  %>
+</div>

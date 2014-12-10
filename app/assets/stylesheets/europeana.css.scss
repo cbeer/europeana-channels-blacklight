@@ -1,18 +1,28 @@
-@import 'http://styleguide.europeana.eu/css/screen.css';
+//@import 'http://styleguide.europeana.eu/css/screen.css';
 
-.home-search-box {
-	background-color: #fff;
+.search-box {
 	padding: 20px;
-	width: 300px;
-	height: 300px;
+	width: 513px;
+	height: 213px;
 }
 
 @media all and (min-width: 60em) {
 	// http://css-tricks.com/perfect-full-page-background-image/
-	body.blacklight-catalog-index {
+	body.hero {
 		background-repeat: no-repeat;
 		background-attachment: fixed;
 		background-position: center center;
+
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-ms-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+	}
+
+	.hero {
+		background-repeat: no-repeat;
+		background-position: top center;
 
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
