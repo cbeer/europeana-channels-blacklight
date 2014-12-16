@@ -3,6 +3,9 @@ body {
 	margin: 0;
 }
 
+ul {
+	margin: 0;
+}
 .search-box-index {
 	position: absolute;
 	top: 0;
@@ -39,6 +42,16 @@ span.channel-id {
 	margin: 15px 0 0 10px;
 	color: #fff;
 	font-family: sans-serif;
+}
+
+#header-navbar {
+	float: right;
+}
+
+#header-navbar a {
+	font-family: sans-serif;
+	color: #fffff0;
+	text-decoration: none;
 }
 
 @media all and (min-width: 60em) {

@@ -1,0 +1,24 @@
+<% if available_channels.present? %>
+<style>
+<% for channel in available_channels %>
+	<% if channel.to_s != 'home' %>
+	.search-box-show.<%= channel %> {
+		background-color: <%= Channels::Application.config.channels[channel][:'theme-color'] %>;
+	}
+	<% end %>
+<% end -%>
+	@media all and (min-width: 60em) {
+		body.blacklight-channels-index {
+			background-image: url( '<%= image_path Channels::Application.config.channels[:home][:hero] %>' );
+		}
+<% for channel in available_channels %>
+		<% if channel.to_s != 'home' -%>
+		.hero.channel-<%= channel %> {
+			height: 500px;
+			background-image: url( '<%= image_path Channels::Application.config.channels[channel][:hero] %>' );
+		}
+		<% end %>
+<% end %>
+	}
+</style>
+<% end -%>
