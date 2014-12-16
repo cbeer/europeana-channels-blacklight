@@ -19,15 +19,15 @@
     <%= stylesheet_link_tag "application", media: "all" %>
     <style>
       .search-box.home {
-        background-color: #fff;
+        background-color: <%= Channels::Application.config.channels[:home][:'theme-color'] %>;
       }
 
       .search-box.music {
-        background-color: #fbac40;
+        background-color: <%= Channels::Application.config.channels[:music][:'theme-color'] %>;
       }
 
       .search-box.fashion {
-        background-color: #e598dc;
+        background-color: <%= Channels::Application.config.channels[:fashion][:'theme-color'] %>;
       }
 
       @media all and (min-width: 60em) {

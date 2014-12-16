@@ -1,10 +1,9 @@
 <div class="hero channel-<%= @channel.id %>">
 	<div class="search-box <%= @channel.id %>">
-		<a href="/"><%= image_tag( 'logos/europeana.png', :alt => 'Europeana - think culture' ) %></a>
+		<a href="/"><%= image_tag( 'logos/europeana-europeana-100.png', :alt => 'Europeana - think culture' ) %> <%= @channel.id %></a>
 		<%= render_search_bar  %>
 	</div>
 </div>
 
-<h1><%= @channel.id %></h1>
 <h2>index for all channels except for home</h2>
 <p>generic index page for each channel. needs to be branded accordingly using the channel.id</p>
