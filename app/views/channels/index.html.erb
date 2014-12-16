@@ -1,6 +1,6 @@
 <%= render 'header' %>
-<div class="search-box <%= @channel.id %>">
-	<a href="/"><%= image_tag( 'logos/europeana-e-100.png', :alt => 'Europeana - think culture' ) %> <%= @channel.id %></a>
+<div class="search-box-index <%= @channel.id %>">
+	<a href="/" title="Europeana - think culture"><%= image_tag( 'logos/europeana-think-100.png', :alt => 'Europeana - think culture' ) %></a>
   <%= render_search_bar  %>
 </div>
 <%= render 'footer' %>

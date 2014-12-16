@@ -1,6 +1,6 @@
 <div class="hero channel-<%= @channel.id %>">
-	<div class="search-box <%= @channel.id %>">
-		<a href="/"><%= image_tag( 'logos/europeana-europeana-100.png', :alt => 'Europeana - think culture' ) %> <%= @channel.id %></a>
+	<div class="search-box-show <%= @channel.id %>">
+		<a href="/"><%= image_tag( 'logos/europeana-100.png', :alt => 'Europeana - think culture' ) %> <span class="channel-id"><%= @channel.id %></span></a>
 		<%= render_search_bar  %>
 	</div>
 </div>

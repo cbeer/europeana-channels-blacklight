@@ -1,9 +1,44 @@
 //@import 'http://styleguide.europeana.eu/css/screen.css';
+body {
+	margin: 0;
+}
 
-.search-box {
+.search-box-index {
+	position: absolute;
+	top: 0;
+	left: 5%;
+	background-color: #fff;
 	padding: 20px;
-	width: 513px;
-	height: 213px;
+	width: 320px;
+	height: 310px;
+}
+
+.search-box-show {
+	position: absolute;
+	top: 0;
+	left: 5%;
+	padding: 20px;
+	width: 490px;
+	height: 190px;
+}
+
+.search-box-show a {
+	display: block;
+	overflow: auto;
+	margin-bottom: 1em;
+	text-decoration: none;
+}
+
+.search-box-show img {
+	float: left;
+}
+
+span.channel-id {
+	font-size: 190%;
+	float: left;
+	margin: 15px 0 0 10px;
+	color: #fff;
+	font-family: sans-serif;
 }
 
 @media all and (min-width: 60em) {
