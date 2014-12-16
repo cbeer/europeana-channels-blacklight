@@ -1,4 +1,5 @@
 ---
 :hero: backgrounds/fashion.jpg
+:theme-color: '#e598dc'
 :query: ! '(PROVIDER: "Europeana Fashion") OR (what: Fashion) OR (what: mode) OR (what:
   moda)'
