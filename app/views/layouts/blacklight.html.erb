@@ -18,15 +18,11 @@
     <%= favicon_link_tag 'favicon.ico' %>
     <%= stylesheet_link_tag "application", media: "all" %>
     <style>
-      .search-box.home {
-        background-color: <%= Channels::Application.config.channels[:home][:'theme-color'] %>;
-      }
-
-      .search-box.music {
+      .search-box-show.music {
         background-color: <%= Channels::Application.config.channels[:music][:'theme-color'] %>;
       }
 
-      .search-box.fashion {
+      .search-box-show.fashion {
         background-color: <%= Channels::Application.config.channels[:fashion][:'theme-color'] %>;
       }
 
