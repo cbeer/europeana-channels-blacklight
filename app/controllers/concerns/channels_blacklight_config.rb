@@ -9,14 +9,14 @@ module ChannelsBlacklightConfig
       ## Default parameters to send to solr for all search-like requests. See also SolrHelper#solr_search_params
       config.default_solr_params = { 
         :qt => 'search',
-        :rows => 10 
+        :rows => 24
       }
       
       # solr path which will be added to solr base url before the other solr params.
       #config.solr_path = 'select' 
       
       # items to show per page, each number in the array represent another option to choose from.
-      #config.per_page = [10,20,50,100]
+      config.per_page = [ 12, 24, 48, 96 ]
 
       ## Default parameters to send on single-document requests to Solr. These settings are the Blackligt defaults (see SolrHelper#solr_doc_params) or 
       ## parameters included in the Blacklight-jetty document requestHandler.
@@ -57,16 +57,14 @@ module ChannelsBlacklightConfig
       #
       # :show may be set to false if you don't want the facet to be drawn in the 
       # facet bar
-  #    config.add_facet_field 'proxy_dc_type', :label => 'dc:type'
-  #    config.add_facet_field 'proxy_dc_subject', :label => 'dc:subject'
-      config.add_facet_field 'UGC', :label => 'UGC'
-      config.add_facet_field 'LANGUAGE', :label => 'LANGUAGE'
-      config.add_facet_field 'TYPE', :label => 'TYPE'
-      config.add_facet_field 'YEAR', :label => 'YEAR'
+      config.add_facet_field 'UGC', :label => 'UGC', :limit => 20
+      config.add_facet_field 'LANGUAGE', :label => 'LANGUAGE', :limit => 20
+      config.add_facet_field 'TYPE', :label => 'TYPE', :limit => 20
+      config.add_facet_field 'YEAR', :label => 'YEAR', :limit => 20
       config.add_facet_field 'PROVIDER', :label => 'PROVIDER'
-      config.add_facet_field 'DATA_PROVIDER', :label => 'DATA_PROVIDER'
-      config.add_facet_field 'COUNTRY', :label => 'COUNTRY'
-      config.add_facet_field 'RIGHTS', :label => 'RIGHTS'
+      config.add_facet_field 'DATA_PROVIDER', :label => 'DATA_PROVIDER', :limit => 20
+      config.add_facet_field 'COUNTRY', :label => 'COUNTRY', :limit => 20
+      config.add_facet_field 'RIGHTS', :label => 'RIGHTS', :limit => 20
       
   #    config.add_facet_field 'pub_date', :label => 'Publication Year', :single => true
   #    config.add_facet_field 'subject_topic_facet', :label => 'Topic', :limit => 20 
@@ -95,14 +93,15 @@ module ChannelsBlacklightConfig
 
       # solr fields to be displayed in the show (single result) view
       #   The ordering of the field names is the order of the display 
-      config.add_show_field 'dcType', :label => 'Type'
-      config.add_show_field 'dctermsExtent', :label => 'Format'
-      config.add_show_field 'dcSubject', :label => 'Subject'
-      config.add_show_field 'dcIdentifier', :label => 'Identifier'
-      config.add_show_field 'dctermsProvenance', :label => 'Provenance'
-      config.add_show_field 'edmDataProvider', :label => 'Data provider'
-      config.add_show_field 'edmProvider', :label => 'Provider'
-      config.add_show_field 'edmCountry', :label => 'Providing country'
+      config.add_show_field 'edmPreview', :label => 'Preview'
+      config.add_show_field 'dcType_def', :label => 'Type'
+      config.add_show_field 'dctermsExtent_def', :label => 'Format'
+      config.add_show_field 'dcSubject_def', :label => 'Subject'
+      config.add_show_field 'dcIdentifier_def', :label => 'Identifier'
+      config.add_show_field 'dctermsProvenance_def', :label => 'Provenance'
+      config.add_show_field 'edmDataProvider_def', :label => 'Data provider'
+      config.add_show_field 'edmProvider_def', :label => 'Provider'
+      config.add_show_field 'edmCountry_def', :label => 'Providing country'
       
       # "fielded" search configuration. Used by pulldown among other places.
       # For supported keys in hash, see rdoc for Blacklight::SearchFields
