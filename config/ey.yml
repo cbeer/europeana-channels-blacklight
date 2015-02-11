@@ -2,6 +2,7 @@ environments:
   demo:
     maintenance_on_migrate: true
     precompile_assets: true
+    branch: ey-demo
   frontend:
     maintenance_on_migrate: true
     precompile_assets: true
