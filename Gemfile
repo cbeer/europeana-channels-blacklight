@@ -46,8 +46,6 @@ gem 'blacklight', '~> 5.9.0'
 #gem 'devise'
 #gem 'devise-guests', '~> 0.3'
 
-gem 'rsolr-europeana', :git => 'https://github.com/rwd/rsolr-europeana.git', :ref => '0387465'
-
 gem 'europeana', :git => 'https://github.com/rwd/europeana-client-ruby.git', :ref => 'e0d9828'
 
 # Ruby 2.2 compatible version
@@ -65,3 +63,6 @@ gem 'web-console', '~> 2.0', group: :development
 # Security analysis
 gem "brakeman", :require => false, groups: [ :development, :test ]
 
+gem 'faraday'
+
+gem 'byebug', group: [:development]

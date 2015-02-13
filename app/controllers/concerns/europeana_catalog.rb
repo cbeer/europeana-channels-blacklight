@@ -14,7 +14,7 @@ module EuropeanaCatalog
   end
   
   def solr_repository
-    @solr_repository ||= Europeana::SolrRepository.new(blacklight_config)
+    @solr_repository ||= Europeana::Repository.new(blacklight_config)
   end
   
   def channels_search_params

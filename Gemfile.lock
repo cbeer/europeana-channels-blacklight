@@ -7,14 +7,6 @@ GIT
       activesupport (>= 3.0)
       multi_json (~> 1.0)
 
-GIT
-  remote: https://github.com/rwd/rsolr-europeana.git
-  revision: 038746513eba0349bbad3d1059dd3ecbddeb0485
-  ref: 0387465
-  specs:
-    rsolr-europeana (0.0.2)
-      rsolr (~> 1.0.6)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -80,6 +72,10 @@ GEM
       sass (~> 3.0)
       terminal-table (~> 1.4)
     builder (3.2.2)
+    byebug (3.5.1)
+      columnize (~> 0.8)
+      debugger-linecache (~> 1.2)
+      slop (~> 3.6)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -87,7 +83,9 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    columnize (0.9.0)
     debug_inspector (0.0.2)
+    debugger-linecache (1.2.0)
     deprecation (0.1.0)
       activesupport
     dotenv (1.0.2)
@@ -96,6 +94,8 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.6)
     execjs (2.2.2)
+    faraday (0.9.1)
+      multipart-post (>= 1.2, < 3)
     fastercsv (1.5.5)
     globalid (0.3.0)
       activesupport (>= 4.1.0)
@@ -122,6 +122,7 @@ GEM
     mini_portile (0.6.2)
     minitest (5.5.1)
     multi_json (1.10.1)
+    multipart-post (2.0.0)
     mysql2 (0.3.16)
     nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
@@ -179,6 +180,7 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     sexp_processor (4.4.5)
+    slop (3.6.0)
     spring (1.1.3)
     sprockets (2.11.3)
       hike (~> 1.2)
@@ -213,17 +215,18 @@ PLATFORMS
 DEPENDENCIES
   blacklight (~> 5.9.0)
   brakeman
+  byebug
   coffee-rails (~> 4.0.0)
   dotenv-rails (~> 1.0.2)
   europeana!
   eventmachine (~> 1.0.6)
+  faraday
   jbuilder (~> 2.0)
   jquery-rails
   mysql2
   puma (~> 2.11.0)
   rails (= 4.2.0)
   rails_12factor (~> 0.0.3)
-  rsolr-europeana!
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   spring
