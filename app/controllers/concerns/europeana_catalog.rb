@@ -13,8 +13,8 @@ module EuropeanaCatalog
     url_for params.merge(controller: "catalog", action: "facet").merge(options).except(:page)
   end
   
-  def solr_repository
-    @solr_repository ||= Europeana::Repository.new(blacklight_config)
+  def repository_class
+    Europeana::Repository
   end
   
   def channels_search_params
