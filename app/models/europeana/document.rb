@@ -1,9 +1,42 @@
 module Europeana
   class Document
     include Blacklight::Solr::Document
-    
-    attr_reader :hierarchy
-    
+
+    def initialize source_doc, response = nil
+      doc = source_doc.dup
+
+      doc[:id] ||= doc[:about]
+
+      proxy = doc.fetch(:proxies, [{}]).first.reject do |key, value|
+        [ :proxyFor, :europeanaProxy, :proxyIn, :about ].include?(key)
+      end
+
+      aggregation = doc.fetch(:aggregations, [{}]).first.reject do |key, value|
+        [ :webResources, :aggregatedCHO, :about ].include?(key)
+      end
+
+      eaggregation = doc.fetch(:europeanaAggregation, {}).reject do |key, value|
+        [ :about, :aggregatedCHO ].include?(key)
+      end
+
+      doc.merge!(proxy).merge!(aggregation).merge!(eaggregation)
+
+      doc.dup.each_pair do |key, value|
+        if value.is_a?(Array)
+          doc[key] = value.uniq
+        elsif value.is_a?(Hash)
+          if value.has_key?(:def)
+            value.each_pair do |lang, labels|
+              doc["#{key}_#{lang}"] = labels
+            end
+          end
+          doc.delete(key)
+        end
+      end
+
+      super doc, response
+    end
+
     def to_param
       "#{provider_id}/#{record_id}"
     end
@@ -18,6 +51,10 @@ module Europeana
     
     def cache_key
       "#{provider_id}/#{record_id}-#{self['timestamp_update_epoch']}"
+    end
+
+    def hierarchy
+      @hierarchy ||= load_hierarchy
     end
     
     def load_hierarchy

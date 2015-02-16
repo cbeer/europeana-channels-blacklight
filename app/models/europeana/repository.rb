@@ -29,48 +29,11 @@ module Europeana
     def solrize_record_response(req_params, response)
       response.deep_symbolize_keys!
 
-      obj = response[:object]
-      
-      doc = obj.select do |key, value|
-        [ :edmDatasetName, :language, :type, :title, :about, 
-          :europeanaCollectionName, :timestamp_created_epoch,
-          :timestamp_update_epoch, :timestamp_created, :timestamp_update ].include?(key)
-      end
-      
-      doc[:id] = obj[:about]
-      
-      proxy = obj[:proxies].first.reject do |key, value|
-        [ :proxyFor, :europeanaProxy, :proxyIn, :about ].include?(key)
-      end
-      
-      aggregation = obj[:aggregations].first.reject do |key, value|
-        [ :webResources, :aggregatedCHO, :about ].include?(key)
-      end
-      
-      eaggregation = obj[:europeanaAggregation].reject do |key, value|
-        [ :about, :aggregatedCHO ].include?(key)
-      end
-      
-      doc.merge!(proxy).merge!(aggregation).merge!(eaggregation)
-      
-      doc.dup.each_pair do |key, value|
-        if value.is_a?(Array)
-          doc[key] = value.uniq
-        elsif value.is_a?(Hash)
-          if value.has_key?(:def)
-            value.each_pair do |lang, labels|
-              doc["#{key}_#{lang}"] = labels
-            end
-          end
-          doc.delete(key)
-        end
-      end
-      
       h = {
         'response' => {
           'numFound' => 1,
           'start' => 0,
-          'docs' => [ doc ]
+          'docs' => [ response[:object] ]
         }
       }
 
