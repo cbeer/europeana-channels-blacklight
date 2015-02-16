@@ -7,51 +7,19 @@ module Europeana
     end
 
     def find id, params = {}
-      path = "/api/v2/record/#{id}.json"
-      req_params = {}
-      resp = client.get do |req|
-        req.url path
-        req.headers['Content-Type'] = 'application/json'
-        req.params[:wskey] = api_key
-        req_params = req.params
-      end
-      response = JSON.parse(resp.body, symbolize_names: true)
+      record = Europeana::Record.new("/" + id)
+      response = record.get
 
-      solrize_record_response(req_params, response)
+      solrize_record_response(params, response)
     end
 
     def search params = {}
-      path = "/api/v2/search.json"
-
-      req_params = {}
-      resp = client.get do |req|
-        req.url path
-        req.headers['Content-Type'] = 'application/json'
-        req.params[:wskey] = api_key
-        
-        req.params[:query] = params[:q].blank? ? '*:*' : params.delete(:q)
-        req.params[:profile] = "facets params"
-        req.params[:facet] = params["facet.field"]
-        req.params[:start] = (params[:start] || 0) + 1
-        req.params[:qf] = params.delete(:fq) unless params[:fq].blank?
-        req.params[:rows] = params["rows"]
-        req_params = req.params
-      end
-
-      response = JSON.parse(resp.body, symbolize_names: true)
-
-      solrize_search_response(req_params, response)
+      search = Europeana::Search.new(europeanize_search_request(params))
+      response = search.execute
+      solrize_search_response(params, response)
     end
 
     private
-    def client
-      @client ||= Faraday.new url: 'http://www.europeana.eu/api/v2'
-    end
-
-    def api_key
-      blacklight_config.api_key
-    end
-    
     ##
     # Adapts a response from the API's Record method to resemble a Solr
     # query response of one document.
@@ -59,6 +27,8 @@ module Europeana
     # @param [Hash] response The Europeana REST API response
     # @return [Hash]
     def solrize_record_response(req_params, response)
+      response.deep_symbolize_keys!
+
       obj = response[:object]
       
       doc = obj.select do |key, value|
@@ -107,6 +77,16 @@ module Europeana
       blacklight_config.solr_response_model.new(h, req_params, solr_document_model: blacklight_config.solr_document_model)
     end
     
+    def europeanize_search_request(req_params)
+      params = {}
+      params[:query] = req_params[:q].blank? ? '*:*' : req_params.delete(:q)
+      params[:profile] = "facets params"
+      params[:start] = (req_params[:start] || 0) + 1
+      params[:qf] = req_params.delete(:fq) unless req_params[:fq].blank?
+      params[:rows] = req_params["rows"]
+      params
+    end
+
     ##
     # Adapts a response from the API's Search method to resemble a Solr
     # query response.
@@ -114,6 +94,8 @@ module Europeana
     # @param [Hash] response The Europeana REST API response
     # @return [Hash]
     def solrize_search_response(req_params, response)
+      response.deep_symbolize_keys!
+
       facet_fields = (response[:facets] || []).inject({}) do |facet_fields, facet|
         facet_fields[facet[:name]] = facet[:fields].collect { |field| [ field[:label], field[:count] ] }.flatten
         facet_fields
