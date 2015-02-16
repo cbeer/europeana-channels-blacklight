@@ -4,11 +4,7 @@
     <% if should_render_show_field? document, field %>
       <dt class="blacklight-<%= solr_fname.parameterize %>"><%= render_document_show_field_label document, :field => solr_fname %></dt>
       <dd class="blacklight-<%= solr_fname.parameterize %>">
-        <% if solr_fname == 'edmPreview' -%>
-          <%= image_tag render_document_show_field_value document, :field => solr_fname %>
-        <% else -%>
-          <%= render_document_show_field_value document, :field => solr_fname %>
-        <% end -%>
+        <%= render_document_show_field_value document, :field => solr_fname %>
       </dd>
     <% end -%>
   <% end -%>
