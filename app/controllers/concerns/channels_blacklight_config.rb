@@ -37,6 +37,7 @@ module ChannelsBlacklightConfig
       config.index.display_type_field = 'type'
       config.index.thumbnail_field = 'edmPreview'
 
+      config.show.partials << "document_hierarchy"
       # solr field configuration for document/show views
       #config.show.title_field = 'title_display'
       #config.show.display_type_field = 'format'
